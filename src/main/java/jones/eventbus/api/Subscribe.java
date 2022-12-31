@@ -16,13 +16,11 @@
 
 package jones.eventbus.api;
 
-import jones.eventbus.internal.Copyright;
 import jones.eventbus.internal.Since;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-@Copyright
 @Since("0.0.1-dev")
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Subscribe {

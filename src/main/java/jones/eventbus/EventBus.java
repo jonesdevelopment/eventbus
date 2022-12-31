@@ -19,7 +19,6 @@ package jones.eventbus;
 import jones.eventbus.api.Event;
 import jones.eventbus.api.Listener;
 import jones.eventbus.api.Subscribe;
-import jones.eventbus.internal.Copyright;
 import jones.eventbus.internal.Since;
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +34,6 @@ import static java.util.Objects.requireNonNull;
  * © <a href="https://github.com/jonesdevelopment/">jonesdev.xyz</a> - Do not distribute
  */
 
-@Copyright
 @Since("0.0.1-dev")
 @RequiredArgsConstructor
 public final class EventBus {
