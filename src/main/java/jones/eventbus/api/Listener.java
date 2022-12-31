@@ -16,5 +16,10 @@
 
 package jones.eventbus.api;
 
+import jones.eventbus.internal.Copyright;
+import jones.eventbus.internal.Since;
+
+@Copyright
+@Since("0.0.1-dev")
 public interface Listener {
 }

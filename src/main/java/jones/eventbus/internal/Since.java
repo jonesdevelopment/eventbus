@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package jones.eventbus.api;
+package jones.eventbus.internal;
 
-import jones.eventbus.internal.Copyright;
-import jones.eventbus.internal.Since;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-@Copyright
-@Since("0.0.1-dev")
-public abstract class Event {
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Since {
+    String value();
 }
