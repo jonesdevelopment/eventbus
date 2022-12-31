@@ -1,7 +1,5 @@
 ## :comet: EventBus
 
-[Mashe](https://github.com/xHyroM/mashe) wasn't good, so I created my own event system
-
 > **Note** Made in under 25 minutes
 
 ### Usage
