@@ -9,17 +9,17 @@ public class YourClass implements jones.eventbus.api.Listener /* This part is im
 
   // register event handler
   public void registerEventHandler() {
-    eventBus.register(this);
+    eventBus.register(this); // you can use other class instances too
   }
 
   // unregister event handler
   public void unregisterEventHandler() {
-    eventBus.unregister(this);
+    eventBus.unregister(this); // you can use other class instances too
   }
 
-  // subscribe an event
+  // subscribe to an event
   @jones.eventbus.api.Subscribe
-  // event can also be a custom event (your class must extend jones.eventbus.api.Event)
+  // `event` can also be a custom event (your class must extend jones.eventbus.api.Event)
   public void handle(jones.eventbus.api.Event event) {
     // do stuff
   }
