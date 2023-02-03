@@ -68,11 +68,12 @@ public final class EventBus {
         }
 
         Arrays.stream(subscriber.getClass().getDeclaredMethods())
-                .filter(Objects::nonNull)
-                .filter(method -> method.isAnnotationPresent(Subscribe.class))
-                .filter(method -> method.getParameterTypes().length == 1)
-                .filter(method -> !Modifier.isStatic(method.getModifiers()))
-                .filter(method -> Modifier.isPublic(method.getModifiers()))
+                .filter(obj -> Objects.nonNull(obj) &&
+                        obj.isAnnotationPresent(Subscribe.class) &&
+                        obj.getParameterTypes().length == 1 &&
+                        !Modifier.isStatic(obj.getModifiers())
+                        && Modifier.isPublic(obj.getModifiers())
+                )
                 .distinct()
                 .forEach(method -> registerInternally(method.getParameterTypes()[0], subscriber.getClass(), (Listener) subscriber, method));
     }
@@ -84,8 +85,8 @@ public final class EventBus {
         registered.putIfAbsent(requireNonNull(parameters), new HashSet<>());
 
         final SubscribedMethod subscribed = new SubscribedMethod(
-                requireNonNull(subscriber),
-                requireNonNull(listener),
+                subscriber,
+                listener,
                 requireNonNull(method));
 
         registered.get(parameters).add(subscribed);
@@ -94,7 +95,13 @@ public final class EventBus {
     public void unregister(final Object subscriber) {
         requireNonNull(subscriber);
 
-        registered.remove(subscriber.getClass());
+        final Class<?> subscriberClass = subscriber.getClass();
+        registered.values().forEach(e -> {
+            e.stream()
+                    .filter(subscribedMethod -> subscribedMethod.subscriber == subscriberClass)
+                    .toList()
+                    .forEach(e::remove);
+        });
     }
 
     record SubscribedMethod(Class<?> subscriber, Listener listener, Method method) {
